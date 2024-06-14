@@ -1,0 +1,21 @@
+:root {
+  --color-1: #1B1D1F;
+  --color-2: #282B30;
+  --color-3: #4E80EE;
+  --color-4: #6C727F;
+  --color-5: #D2D5DA;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--color-2);
+  position: relative;
+}
+
