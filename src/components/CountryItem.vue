@@ -49,6 +49,10 @@ const props = defineProps({
     required: true
   }
 })
+
+
+
+
 </script>
 
 <style module>
@@ -59,6 +63,7 @@ const props = defineProps({
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 12px;
+  align-items: center;
 }
 
 .wrapper:hover {

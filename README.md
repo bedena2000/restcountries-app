@@ -13,3 +13,7 @@ Task 4 (Completed ✔️):
 
 Task 5 (Completed ✔️)
   Create country component 
+
+Task 6 (Completed ✔️)
+  Create Skeleton Loader
+

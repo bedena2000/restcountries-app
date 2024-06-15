@@ -18,7 +18,6 @@ import services from '@/services';
 import { useCountriesData } from '@/stores/counter';
 
 const store = useCountriesData();
-console.log(store.list.length);
   
 </script>
 

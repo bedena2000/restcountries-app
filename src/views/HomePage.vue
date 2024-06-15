@@ -15,6 +15,20 @@
             :area="item.area"
             :region="item.region"
           />
+          <div v-show="isLoading" :class="$style.loadingWrapper">
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+            <SkeletonLoader />
+          </div>
         </div>
       </div>
     </div>
@@ -31,6 +45,7 @@
 import SearchBar from '@/components/SearchBar.vue'
 import SearchOptions from '@/components/SearchOptions.vue'
 import CountryItem from '@/components/CountryItem.vue'
+import SkeletonLoader from '@/components/SkeletonLoader.vue'
 import services from '@/services'
 import { ref } from 'vue'
 import { useCountriesData } from '@/stores/counter'
@@ -73,12 +88,19 @@ getCountries()
   overflow-x: hidden;
 }
 
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .listWrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
   height: 70vh;
   overflow: scroll;
+  width: 100%;
 }
 
 .errorMessage,
