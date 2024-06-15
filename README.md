@@ -17,3 +17,9 @@ Task 5 (Completed ✔️)
 Task 6 (Completed ✔️)
   Create Skeleton Loader
 
+Task 7 (Completed ✔️)
+  Create Description Page
+
+Task 8 (Pending)
+  Make Search Logic
+

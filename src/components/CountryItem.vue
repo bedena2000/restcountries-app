@@ -1,5 +1,5 @@
 <template>
-  <div v-show="props" :class="$style.wrapper">
+  <div @click="selectCountry" v-show="props" :class="$style.wrapper">
     <div :class="$style.flag">
       <img :src="props.flag" alt="flagIcon" />
     </div>
@@ -23,6 +23,9 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const props = defineProps({
   flag: {
     type: String,
@@ -50,9 +53,11 @@ const props = defineProps({
   }
 })
 
-
-
-
+const selectCountry = () => {
+  const countryName = props.name
+  router.push(`/country/${countryName}`)
+  console.log(countryName)
+}
 </script>
 
 <style module>

@@ -130,6 +130,10 @@ getCountries()
   .errorMessage {
     font-size: 18px;
   }
+
+  .mainWrapper {
+    flex-direction: column;
+  }
 }
 
 ::-webkit-scrollbar {
