@@ -2,7 +2,7 @@
   <div :class="$style.wrapper">
 
     <p :class="$style.countries">
-      Found 235 countries
+      Found {{ store.list.length }} countries
     </p>
 
     <div :class="$style.search">
@@ -15,9 +15,10 @@
 
 <script setup>
 import services from '@/services';
+import { useCountriesData } from '@/stores/counter';
 
-
-
+const store = useCountriesData();
+console.log(store.list.length);
   
 </script>
 

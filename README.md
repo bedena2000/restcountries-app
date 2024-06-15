@@ -7,6 +7,9 @@ Task 2: (Completed ✔️)
 Task 3: (Completed ✔️)
   Create SearchOptions Components
 
-Task 4 (Pending): 
+Task 4 (Completed ✔️): 
   Get data and save it to the store
   Generate error and loading page
+
+Task 5 (Completed ✔️)
+  Create country component 

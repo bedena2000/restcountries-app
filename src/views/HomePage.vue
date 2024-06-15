@@ -5,6 +5,17 @@
 
       <div :class="$style.mainWrapper">
         <SearchOptions />
+        <div :class="$style.listWrapper">
+          <CountryItem
+            v-for="item in store.list"
+            v-bind:key="item.population"
+            :flag="item.flags.svg"
+            :name="item.name.common"
+            :population="item.population"
+            :area="item.area"
+            :region="item.region"
+          />
+        </div>
       </div>
     </div>
 
@@ -19,6 +30,7 @@
 <script setup lang="ts">
 import SearchBar from '@/components/SearchBar.vue'
 import SearchOptions from '@/components/SearchOptions.vue'
+import CountryItem from '@/components/CountryItem.vue'
 import services from '@/services'
 import { ref } from 'vue'
 import { useCountriesData } from '@/stores/counter'
@@ -51,15 +63,22 @@ getCountries()
   z-index: 2;
   color: white;
   background-color: var(--color-2);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   width: 1200px;
   margin: 0 auto;
   transform: translateY(-60px);
   padding: 40px 30px;
   border-radius: 14px;
-  border: 0.1px solid #5d5a5a;
+  border: 0.1px solid #5d5a5a3d;
   height: calc(100vh - 300px);
   overflow-x: hidden;
+}
+
+.listWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 70vh;
+  overflow: scroll;
 }
 
 .errorMessage,
