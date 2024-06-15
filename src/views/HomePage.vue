@@ -1,13 +1,48 @@
 <template>
   <div :class="$style.main">
-    
-    <SearchBar />
+    <div v-show="!isError && !isLoading">
+      <SearchBar />
 
+      <div :class="$style.mainWrapper">
+        <SearchOptions />
+      </div>
+    </div>
+
+    <p v-show="isError && !isLoading" :class="$style.errorMessage">
+      😓 Something Went Wrong. please try again
+    </p>
+
+    <p v-show="!isError && isLoading" :class="$style.loadingMessage">Loading content...</p>
   </div>
 </template>
 
-<script setup>
-import SearchBar from '@/components/SearchBar.vue';
+<script setup lang="ts">
+import SearchBar from '@/components/SearchBar.vue'
+import SearchOptions from '@/components/SearchOptions.vue'
+import services from '@/services'
+import { ref } from 'vue'
+import { useCountriesData } from '@/stores/counter'
+
+const store = useCountriesData()
+
+const isError = ref(false)
+const isLoading = ref(false)
+
+const getCountries = async () => {
+  isLoading.value = true
+  try {
+    const data = await services.getAllCountries()
+    const result = await data.json()
+    store.changeList(result)
+    isError.value = false
+  } catch (error) {
+    isError.value = true
+  } finally {
+    isLoading.value = false
+  }
+}
+
+getCountries()
 </script>
 
 <style module>
@@ -23,9 +58,37 @@ import SearchBar from '@/components/SearchBar.vue';
   padding: 40px 30px;
   border-radius: 14px;
   border: 0.1px solid #5d5a5a;
-  overflow: scroll;
   height: calc(100vh - 300px);
   overflow-x: hidden;
+}
+
+.errorMessage,
+.loadingMessage {
+  font-size: 38px;
+  font-weight: bold;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 1280px) {
+  .main {
+    width: 90%;
+  }
+
+  .errorMessage {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .errorMessage {
+    font-size: 18px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -48,5 +111,11 @@ import SearchBar from '@/components/SearchBar.vue';
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.mainWrapper {
+  display: flex;
+  gap: 24px;
+  margin-top: 42px;
 }
 </style>

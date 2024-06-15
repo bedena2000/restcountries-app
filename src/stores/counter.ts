@@ -1,12 +1,24 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+export const useCountriesData = defineStore('countriesData', () => {
+  const chosenRegion = ref('')
+  const sortBy = ref('Population')
+  const list = ref([])
 
-  return { count, doubleCount, increment }
+  const changeChosenRegion = (newRegion: string) => (chosenRegion.value = newRegion)
+
+  const changeSortBy = (newSortOption: string) => (sortBy.value = newSortOption)
+
+  const changeList = (newList) => (list.value = newList)
+
+  return {
+    chosenRegion,
+    sortBy,
+    list,
+
+    changeChosenRegion,
+    changeSortBy,
+    changeList
+  }
 })

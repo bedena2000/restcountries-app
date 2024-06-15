@@ -14,6 +14,8 @@
 </template>
 
 <script setup>
+import services from '@/services';
+
 
 
   
@@ -42,6 +44,10 @@
   padding: 6px 8px;
 }
 
+.search > img {
+  cursor: pointer;
+}
+
 .search > input {
   outline: none;
   border: none;
@@ -53,6 +59,7 @@
 }
 
 .search > input::placeholder {
+  font-family: "Montserrat", sans-serif;
   font-size: 12px;
 }
 

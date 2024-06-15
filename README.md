@@ -1,9 +1,12 @@
 Task 1: (Completed ✔️)
-  create main banner
+  Create main banner
 
 Task 2: (Completed ✔️)
-  create search component
+  Create search component
 
-Task 3: (Pending)
-  get data and save it inside store
+Task 3: (Completed ✔️)
+  Create SearchOptions Components
 
+Task 4 (Pending): 
+  Get data and save it to the store
+  Generate error and loading page
