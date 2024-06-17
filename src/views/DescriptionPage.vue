@@ -47,7 +47,7 @@ onMounted(() => {
     const findCountry = async () => {
       isLoading.value = true
       try {
-        const data = await services.findCountryByName(props.countryName)
+        const data = await services.findCountryByCapital(props.countryName)
         const result = await data.json()
         selectedCountry.value = result[0]
       } catch (error) {

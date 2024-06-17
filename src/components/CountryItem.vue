@@ -50,13 +50,17 @@ const props = defineProps({
   region: {
     type: String,
     required: true
+  },
+
+  capital: {
+    type: Array, // Array of strings or undefined
+    required: false // Make capital optional
   }
 })
 
 const selectCountry = () => {
-  const countryName = props.name
-  router.push(`/country/${countryName}`)
-  console.log(countryName)
+  const capitalName = props.capital
+  router.push(`/country/${capitalName}`)
 }
 </script>
 

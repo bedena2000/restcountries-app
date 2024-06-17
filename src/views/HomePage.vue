@@ -5,16 +5,31 @@
 
       <div :class="$style.mainWrapper">
         <SearchOptions />
-        <div :class="$style.listWrapper">
-          <CountryItem
-            v-for="item in store.list"
-            v-bind:key="item.population"
-            :flag="item.flags.svg"
-            :name="item.name.common"
-            :population="item.population"
-            :area="item.area"
-            :region="item.region"
-          />
+        <div v-show="finalList.length > 0" :class="$style.listWrapper">
+          <div v-if="finalList.length === 0">
+            <CountryItem
+              v-for="item in originalList"
+              v-bind:key="item.population"
+              :flag="item.flags.svg"
+              :name="item.name.common"
+              :population="item.population"
+              :area="item.area"
+              :region="item.region"
+              :capital="item.capital"
+            />
+          </div>
+          <div v-else>
+            <CountryItem
+              v-for="item in finalList"
+              v-bind:key="item.population + item.area"
+              :flag="item.flags.svg"
+              :name="item.name.common"
+              :population="item.population"
+              :area="item.area"
+              :region="item.region"
+              :capital="item.capital"
+            />
+          </div>
           <div v-show="isLoading" :class="$style.loadingWrapper">
             <SkeletonLoader />
             <SkeletonLoader />
@@ -47,20 +62,29 @@ import SearchOptions from '@/components/SearchOptions.vue'
 import CountryItem from '@/components/CountryItem.vue'
 import SkeletonLoader from '@/components/SkeletonLoader.vue'
 import services from '@/services'
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useCountriesData } from '@/stores/counter'
+import { off } from 'process'
+import { Country } from '@/stores/counter'
 
 const store = useCountriesData()
 
+const searchValue = store.searchValue
+const sortValue = store.sortBy
+const sortRegion = store.chosenRegion
+
 const isError = ref(false)
 const isLoading = ref(false)
+const originalList = ref<Country[] | []>([])
+const finalList = ref<Country[] | []>([])
 
 const getCountries = async () => {
   isLoading.value = true
   try {
     const data = await services.getAllCountries()
     const result = await data.json()
-    store.changeList(result)
+    finalList.value = result
+    originalList.value = result
     isError.value = false
   } catch (error) {
     isError.value = true
@@ -68,6 +92,44 @@ const getCountries = async () => {
     isLoading.value = false
   }
 }
+
+const combinedProperties = computed(() => ({
+  searchValue: store.searchValue,
+  sortBy: store.sortBy,
+  chosenRegion: store.chosenRegion
+}))
+
+watch(combinedProperties, ({ searchValue, sortBy, chosenRegion }) => {
+  if (!chosenRegion) {
+    if (sortBy === 'Population') {
+      finalList.value = originalList.value.sort((a, b) => b.population - a.population)
+    } else {
+      finalList.value = originalList.value.sort((a, b) => b.area - a.area)
+    }
+  }
+  console.log('changed')
+  if (chosenRegion) {
+    if (sortBy === 'Population') {
+      finalList.value = originalList.value
+        .sort((a, b) => b.population - a.population)
+        .filter((item) => item.region === chosenRegion)
+    } else {
+      finalList.value = originalList.value
+        .sort((a, b) => b.area - a.area)
+        .filter((item) => item.region === chosenRegion)
+    }
+  }
+
+  if (searchValue) {
+    services
+      .findCountryByName(searchValue)
+      .then((result) => result.json())
+      .then((data) => {
+        finalList.value = data
+      })
+  }
+  store.changeSearchValue('')
+})
 
 getCountries()
 </script>

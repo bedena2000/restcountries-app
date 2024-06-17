@@ -159,6 +159,10 @@ const sortedModal = (newSortedValue) => {
     width: 100%;
   }
 
+  .selectWrapper {
+    width: 100%;
+  }
+
   .wrapper {
     width: 100%;
   }

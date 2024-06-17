@@ -5,6 +5,10 @@ export default {
     return fetch(`${apiUrl}/all`)
   },
 
+  findCountryByCapital(name: string) {
+    return fetch(`${apiUrl}/capital/${name}`)
+  },
+
   findCountryByName(name: string) {
     return fetch(`${apiUrl}/name/${name}`)
   }

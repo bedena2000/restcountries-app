@@ -1,28 +1,32 @@
 <template>
   <div :class="$style.wrapper">
-
-    <p :class="$style.countries">
-      Found {{ store.list.length }} countries
-    </p>
+    <p :class="$style.countries">Found {{ store.list.length }} countries</p>
 
     <div :class="$style.search">
-      <img src="/Search.svg" alt="search">
-      <input type="text" placeholder="Search by Name, Region, Subregion">
+      <img @click="updateSearchValue" src="/Search.svg" alt="search" />
+      <input v-model="search" type="text" placeholder="Search by Name" />
     </div>
-
   </div>
 </template>
 
 <script setup>
-import services from '@/services';
-import { useCountriesData } from '@/stores/counter';
+import services from '@/services'
+import { useCountriesData } from '@/stores/counter'
+import { ref } from 'vue'
 
-const store = useCountriesData();
-  
+const store = useCountriesData()
+const search = ref('')
+
+const updateSearchValue = () => {
+  const finalVersion = search.value.trim()
+  if (finalVersion.length > 0) {
+    store.changeSearchValue(finalVersion) 
+    search.value = ''
+  }
+}
 </script>
 
 <style module>
-
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -59,8 +63,7 @@ const store = useCountriesData();
 }
 
 .search > input::placeholder {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
 }
-
 </style>
