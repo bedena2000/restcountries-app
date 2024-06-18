@@ -1,28 +1,16 @@
-Task 1: (Completed ✔️)
-  Create main banner
+<h1>WorldApp - Search Country</h1>
 
-Task 2: (Completed ✔️)
-  Create search component
+![WorldApp](public/website.png)
 
-Task 3: (Completed ✔️)
-  Create SearchOptions Components
+## Used Tools
 
-Task 4 (Completed ✔️): 
-  Get data and save it to the store
-  Generate error and loading page
+    VueJS
+    oh-vue-icons
+    VueRouter
+    Pinia
 
-Task 5 (Completed ✔️)
-  Create country component 
+[LiveDemo](https://66715767fbccd8e51292bc39--comforting-narwhal-508099.netlify.app/)
 
-Task 6 (Completed ✔️)
-  Create Skeleton Loader
+## API
 
-Task 7 (Completed ✔️)
-  Create Description Page
-
-Task 8 (Completed ✔️)
-  Make Search Logic
-
-Task 9 (Pending)
-  Fix additional UI
-
+    RestCountries.com
