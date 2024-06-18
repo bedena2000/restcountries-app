@@ -9,7 +9,7 @@
     VueRouter
     Pinia
 
-[LiveDemo](https://66715767fbccd8e51292bc39--comforting-narwhal-508099.netlify.app/)
+[LiveDemo](https://worldappdemo.netlify.app/)
 
 ## API
 
