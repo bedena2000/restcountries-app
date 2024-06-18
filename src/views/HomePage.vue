@@ -27,6 +27,7 @@
               <p>Region</p>
             </div>
           </div>
+          <p v-if="noFound">Sorry have not found anything</p>
           <div v-if="finalList.length === 0">
             <CountryItem
               v-for="item in originalList"
@@ -87,6 +88,7 @@ import { ref, watch, computed } from 'vue'
 import { useCountriesData } from '@/stores/counter'
 import { off } from 'process'
 import { Country } from '@/stores/counter'
+import router from '@/router'
 
 const store = useCountriesData()
 
@@ -98,6 +100,7 @@ const isError = ref(false)
 const isLoading = ref(false)
 const originalList = ref<Country[] | []>([])
 const finalList = ref<Country[] | []>([])
+const noFound = ref(false)
 
 const getCountries = async () => {
   isLoading.value = true
@@ -143,8 +146,13 @@ watch(combinedProperties, ({ searchValue, sortBy, chosenRegion }) => {
   if (searchValue) {
     services
       .findCountryByName(searchValue)
-      .then((result) => result.json())
+      .then((result) => {
+        return result.json()
+      })
       .then((data) => {
+        if(data.status === 404) {
+          router.push('/errorPage')  
+        }
         finalList.value = data
       })
   }

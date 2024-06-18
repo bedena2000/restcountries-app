@@ -49,6 +49,9 @@ onMounted(() => {
       try {
         const data = await services.findCountryByCapital(props.countryName)
         const result = await data.json()
+        if(result.status === 404) {
+          router.push('/');
+        }
         selectedCountry.value = result[0]
       } catch (error) {
         isError.value = true
