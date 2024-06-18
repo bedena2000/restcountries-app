@@ -6,6 +6,27 @@
       <div :class="$style.mainWrapper">
         <SearchOptions />
         <div v-show="finalList.length > 0" :class="$style.listWrapper">
+          <div :class="$style.countryListTop">
+            <div :class="$style.flag">
+              <p>Flag</p>
+            </div>
+
+            <div :class="$style.name">
+              <p>Name</p>
+            </div>
+
+            <div :class="$style.population">
+              <p>Population</p>
+            </div>
+
+            <div :class="$style.area">
+              <p>Area</p>
+            </div>
+
+            <div :class="$style.region">
+              <p>Region</p>
+            </div>
+          </div>
           <div v-if="finalList.length === 0">
             <CountryItem
               v-for="item in originalList"
@@ -107,7 +128,6 @@ watch(combinedProperties, ({ searchValue, sortBy, chosenRegion }) => {
       finalList.value = originalList.value.sort((a, b) => b.area - a.area)
     }
   }
-  console.log('changed')
   if (chosenRegion) {
     if (sortBy === 'Population') {
       finalList.value = originalList.value
@@ -178,6 +198,16 @@ getCountries()
   text-align: center;
 }
 
+.countryListTop {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 12px;
+  align-items: center;
+}
+
 @media (max-width: 1280px) {
   .main {
     width: 90%;
@@ -224,5 +254,15 @@ getCountries()
   display: flex;
   gap: 24px;
   margin-top: 42px;
+}
+
+@media (max-width: 1280px) {
+  .countryListTop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .region {
+    display: none;
+  }
 }
 </style>

@@ -20,6 +20,9 @@ Task 6 (Completed ✔️)
 Task 7 (Completed ✔️)
   Create Description Page
 
-Task 8 (Pending)
+Task 8 (Completed ✔️)
   Make Search Logic
+
+Task 9 (Pending)
+  Fix additional UI
 

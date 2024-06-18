@@ -169,6 +169,20 @@ const sortedModal = (newSortedValue) => {
 
 }
 
+@media (max-width: 640px) {
+  .regionOptions {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .regionOptions {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+}
+
 .regionItem {
   padding: 12px;
   border-radius: 12px;

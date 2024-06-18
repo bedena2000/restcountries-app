@@ -116,4 +116,11 @@ const selectCountry = () => {
   font-weight: medium;
   color: var(--color-5);
 }
+
+@media (max-width: 1280px) {
+  .wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  } 
+}
+
 </style>

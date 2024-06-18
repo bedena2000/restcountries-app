@@ -2,7 +2,7 @@
   <div :class="$style.wrapper">
     <p :class="$style.countries">Found {{ store.list.length }} countries</p>
 
-    <div :class="$style.search">
+    <div v-on:keyup.enter="updateSearchValue" :class="$style.search">
       <img @click="updateSearchValue" src="/Search.svg" alt="search" />
       <input v-model="search" type="text" placeholder="Search by Name" />
     </div>
@@ -20,7 +20,7 @@ const search = ref('')
 const updateSearchValue = () => {
   const finalVersion = search.value.trim()
   if (finalVersion.length > 0) {
-    store.changeSearchValue(finalVersion) 
+    store.changeSearchValue(finalVersion)
     search.value = ''
   }
 }
